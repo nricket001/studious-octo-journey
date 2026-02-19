@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>404 | Ricket's Construction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0b1014;
+      --bg-alt: #111827;
+      --accent: #f59e0b;
+      --accent-dark: #92400e;
+      --danger: #ef4444;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --line: #4b5563;
+      --card: #020617;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .site {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(55, 65, 81, 0.4), transparent 55%),
+                  linear-gradient(145deg, #020617, #020617);
+      border-radius: 24px;
+      border: 1px solid rgba(75, 85, 99, 0.6);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+      padding: 28px 24px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        135deg,
+        rgba(249, 115, 22, 0.12) 0,
+        transparent 40%,
+        transparent 60%,
+        rgba(234, 179, 8, 0.12) 100%
+      );
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111827;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      box-shadow: 0 12px 30px rgba(248, 181, 0, 0.5);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(248, 181, 0, 0.5);
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--danger);
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.35);
+    }
+
+    .body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        padding: 22px 18px 18px;
+      }
+      .body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .headline {
+      font-size: clamp(2.2rem, 3vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .headline span.code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 1rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(75, 85, 99, 0.8);
+      color: var(--danger);
+    }
+
+    .subtext {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 420px;
+      margin-bottom: 18px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(75, 85, 99, 0.8);
+    }
+
+    .meta-pill strong {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background 0.15s ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      box-shadow: 0 14px 30px rgba(248, 181, 0, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(248, 181, 0, 0.55);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hint span {
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.75rem;
+    }
+
+    /* Construction scene */
+
+    .scene {
+      position: relative;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+      border-radius: 18px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 18px 16px 16px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    .scene-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .scene-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+    }
+
+    .scene-label-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.35);
+    }
+
+    .ground {
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: 18px;
+      height: 4px;
+      background: linear-gradient(90deg, #4b5563 0, #6b7280 40%, #4b5563 100%);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    .dashed-line {
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: 26px;
+      height: 2px;
+      background-image: linear-gradient(90deg, #9ca3af 30%, transparent 30%);
+      background-size: 12px 2px;
+      opacity: 0.4;
+    }
+
+    .barricade {
+      position: absolute;
+      left: 12%;
+      bottom: 26px;
+      width: 150px;
+      height: 70px;
+      transform-origin: bottom center;
+      animation: barricade-wobble 3.2s ease-in-out infinite;
+    }
+
+    .barricade-frame {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      background: #111827;
+      border: 2px solid #4b5563;
+      overflow: hidden;
+    }
+
+    .barricade-stripes {
+      position: absolute;
+      inset: 4px;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        #f97316 0,
+        #f97316 14px,
+        #111827 14px,
+        #111827 28px
+      );
+    }
+
+    .barricade-legs {
+      position: absolute;
+      bottom: -16px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .barricade-leg {
+      width: 4px;
+      height: 22px;
+      background: #4b5563;
+      border-radius: 999px;
+    }
+
+    .warning-light {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fed7aa, #f97316 60%, #7c2d12 100%);
+      box-shadow: 0 0 0 4px rgba(248, 181, 0, 0.35);
+      animation: light-pulse 1.4s ease-in-out infinite;
+    }
+
+    .cone {
+      position: absolute;
+      left: 4%;
+      bottom: 24px;
+      width: 40px;
+      height: 50px;
+      transform-origin: bottom center;
+      animation: cone-wobble 4s ease-in-out infinite;
+    }
+
+    .cone-body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 40px;
+      background: linear-gradient(180deg, #f97316, #ea580c);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .cone-stripe {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 6px;
+      background: #fefce8;
+      opacity: 0.9;
+    }
+
+    .cone-stripe:nth-child(2) {
+      bottom: 18px;
+    }
+
+    .cone-stripe:nth-child(3) {
+      bottom: 10px;
+    }
+
+    .cone-base {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 6px;
+      background: #4b5563;
+      border-radius: 4px;
+    }
+
+    .truck {
+      position: absolute;
+      right: -140px;
+      bottom: 18px;
+      width: 160px;
+      height: 70px;
+      animation: truck-drive 9s linear infinite;
+    }
+
+    .truck-body {
+      position: absolute;
+      bottom: 18px;
+      left: 20px;
+      right: 10px;
+      height: 32px;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      border-radius: 6px 10px 4px 4px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .truck-cab {
+      position: absolute;
+      bottom: 32px;
+      left: 20px;
+      width: 46px;
+      height: 26px;
+      background: #111827;
+      border-radius: 6px 6px 0 0;
+      border: 2px solid #4b5563;
+    }
+
+    .truck-window {
+      position: absolute;
+      top: 4px;
+      left: 6px;
+      width: 26px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+    }
+
+    .truck-bed {
+      position: absolute;
+      bottom: 32px;
+      left: 66px;
+      right: 10px;
+      height: 18px;
+      background: #111827;
+      border-radius: 4px 6px 0 0;
+      border: 2px solid #4b5563;
+    }
+
+    .truck-load {
+      position: absolute;
+      bottom: 34px;
+      left: 70px;
+      right: 18px;
+      height: 10px;
+      background: repeating-linear-gradient(
+        90deg,
+        #f97316 0,
+        #f97316 10px,
+        #facc15 10px,
+        #facc15 20px
+      );
+      border-radius: 4px;
+    }
+
+    .truck-wheel {
+      position: absolute;
+      bottom: 10px;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: #020617;
+      border: 3px solid #111827;
+      box-shadow: 0 0 0 2px #4b5563;
+      overflow: hidden;
+    }
+
+    .truck-wheel::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: inherit;
+      border: 2px solid #9ca3af;
+    }
+
+    .truck-wheel.front {
+      right: 24px;
+    }
+
+    .truck-wheel.back {
+      left: 40px;
+    }
+
+    .dust {
+      position: absolute;
+      bottom: 18px;
+      right: 0;
+      width: 80px;
+      height: 40px;
+      background: radial-gradient(circle at 0 100%, rgba(148, 163, 184, 0.4), transparent 60%);
+      opacity: 0;
+      animation: dust-puff 9s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes barricade-wobble {
+      0%, 100% { transform: rotate(0deg); }
+      10% { transform: rotate(-2deg); }
+      20% { transform: rotate(1.5deg); }
+      30% { transform: rotate(-1deg); }
+      40% { transform: rotate(0.5deg); }
+      50% { transform: rotate(0deg); }
+    }
+
+    @keyframes cone-wobble {
+      0%, 100% { transform: rotate(0deg); }
+      15% { transform: rotate(3deg); }
+      30% { transform: rotate(-2.5deg); }
+      45% { transform: rotate(1.5deg); }
+      60% { transform: rotate(0deg); }
+    }
+
+    @keyframes light-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(248, 181, 0, 0.35); opacity: 1; }
+      50% { box-shadow: 0 0 0 10px rgba(248, 181, 0, 0.05); opacity: 0.7; }
+    }
+
+    @keyframes truck-drive {
+      0% { transform: translateX(0); }
+      40% { transform: translateX(-220px); }
+      60% { transform: translateX(-220px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes dust-puff {
+      0% { opacity: 0; transform: translateX(0); }
+      35% { opacity: 0; transform: translateX(0); }
+      40% { opacity: 0.7; transform: translateX(-10px); }
+      55% { opacity: 0.2; transform: translateX(-40px); }
+      60% { opacity: 0; transform: translateX(-60px); }
+      100% { opacity: 0; transform: translateX(0); }
+    }
+
+    .error-tag {
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(127, 29, 29, 0.95);
+      border: 1px solid rgba(248, 113, 113, 0.8);
+      color: #fecaca;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 1;
+    }
+
+    .error-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #fecaca;
+      box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <section class="card">
+      <div class="header">
+        <div class="brand">
+          <div class="brand-mark">RC</div>
+          <div class="brand-text">
+            <div class="brand-name">Ricket's Construction</div>
+            <div class="brand-tagline">Local. Reliable. Built to last.</div>
+          </div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>404 · Work zone ahead</span>
+        </div>
+      </div>
+
+      <div class="body">
+        <div>
+          <h1 class="headline">
+            Page under construction
+            <span class="code">404</span>
+          </h1>
+          <p class="subtext">
+            The page you’re looking for isn’t poured yet. It may have been moved, renamed, or is still on the plans.
+          </p>
+
+          <div class="meta-row">
+            <div class="meta-pill">
+              <strong>Requested path:</strong>
+              <span id="requested-path">/unknown</span>
+            </div>
+            <div class="meta-pill">
+              <strong>Status:</strong>
+              <span>404 · Not found</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="go-home">
+              <span class="btn-icon">🏠</span>
+              <span>Back to home base</span>
+            </button>
+            <button class="btn btn-secondary" id="go-back">
+              <span class="btn-icon">⟲</span>
+              <span>Previous page</span>
+            </button>
+            <div class="hint">
+              Or press <span>H</span> to go home, <span>B</span> to go back.
+            </div>
+          </div>
+        </div>
+
+        <div class="scene" id="scene">
+          <div class="scene-header">
+            <div class="scene-label">
+              <span class="scene-label-dot"></span>
+              <span>Active job site</span>
+            </div>
+            <span>RC-LLC · Route inspection log</span>
+          </div>
+
+          <div class="dashed-line"></div>
+          <div class="ground"></div>
+
+          <div class="cone">
+            <div class="cone-body">
+              <div class="cone-stripe"></div>
+              <div class="cone-stripe"></div>
+            </div>
+            <div class="cone-base"></div>
+          </div>
+
+          <div class="barricade">
+            <div class="barricade-frame">
+              <div class="barricade-stripes"></div>
+            </div>
+            <div class="barricade-legs">
+              <div class="barricade-leg"></div>
+              <div class="barricade-leg"></div>
+            </div>
+            <div class="warning-light"></div>
+          </div>
+
+          <div class="truck">
+            <div class="truck-body"></div>
+            <div class="truck-cab">
+              <div class="truck-window"></div>
+            </div>
+            <div class="truck-bed"></div>
+            <div class="truck-load"></div>
+            <div class="truck-wheel back"></div>
+            <div class="truck-wheel front"></div>
+          </div>
+
+          <div class="dust"></div>
+        </div>
+      </div>
+
+      <div class="error-tag">
+        <span class="error-tag-dot"></span>
+        <span>Detour required · 404</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const requestedPath = document.getElementById("requested-path");
+      const goHome = document.getElementById("go-home");
+      const goBack = document.getElementById("go-back");
+      const scene = document.getElementById("scene");
+
+      if (requestedPath && window.location && window.location.pathname) {
+        requestedPath.textContent = window.location.pathname;
+      }
+
+      goHome.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+
+      goBack.addEventListener("click", () => {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = "/";
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "h" || e.key === "H") {
+          window.location.href = "/";
+        }
+        if (e.key === "b" || e.key === "B") {
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.href = "/";
+          }
+        }
+      });
+
+      // Simple interactive parallax on mouse move
+      scene.addEventListener("mousemove", (e) => {
+        const rect = scene.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        scene.style.transform = `translateY(${y * -4}px)`;
+      });
+    })();
+  </script>
+</body>
+</html>
