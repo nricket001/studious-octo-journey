@@ -1,149 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RC LCC Construction — Coming Soon!</title>
+  <meta charset="UTF-8" />
+  <title>Ricket's Construction | Commercial, Residential, Equipment Rental & Landscaping</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f3f4f6;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --accent: #f59e0b;
+      --accent-dark: #b45309;
+      --border: #e5e7eb;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #333;
-            overflow-x: hidden;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: url('https://images.unsplash.com/photo-1581091870627-3a5c7f3b6a9a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.55);
-        }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            animation: fadeIn 2s ease;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      height: 48px;
+      width: auto;
+      border-radius: 6px;
+      object-fit: contain;
+    }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin: 0;
-            letter-spacing: 3px;
-        }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111827;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+    }
 
-        .hero p {
-            font-size: 1.4rem;
-            margin-top: 15px;
-        }
+    nav a {
+      color: var(--text-main);
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
 
-        .phone-box {
-            margin-top: 30px;
-            padding: 12px 25px;
-            background: rgba(255, 180, 0, 0.9);
-            color: #222;
-            font-size: 1.3rem;
-            border-radius: 6px;
-            font-weight: bold;
-            display: inline-block;
-            animation: fadeIn 3s ease;
-        }
+    nav a:hover {
+      color: var(--accent-dark);
+    }
 
-        /* Countdown Section */
-        .countdown {
-            padding: 60px 10%;
-            background: white;
-            text-align: center;
-        }
+    /* HERO */
+    .hero {
+      padding: 80px 24px;
+      background: var(--bg-alt);
+      text-align: center;
+    }
 
-        .countdown h2 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-        }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
 
-        .timer {
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
 
-        /* Footer */
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 25px 0;
-            margin-top: 40px;
-        }
+    .cta-btn {
+      background: var(--accent);
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    .cta-btn:hover {
+      background: var(--accent-dark);
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 60px 24px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .text-block {
+      max-width: 900px;
+      margin: auto;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    .text-block h3 {
+      margin-top: 24px;
+      margin-bottom: 8px;
+      color: var(--accent-dark);
+      font-size: 1.4rem;
+    }
+
+    /* SERVICES LIST */
+    .services-list {
+      columns: 2;
+      column-gap: 40px;
+      max-width: 700px;
+      margin: 24px auto;
+    }
+
+    .services-list li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .services-list {
+        columns: 1;
+      }
+    }
+
+    /* TESTIMONIALS */
+    .testimonial {
+      background: var(--bg-alt);
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      margin-bottom: 24px;
+      border-radius: 6px;
+    }
+
+    .testimonial strong {
+      display: block;
+      margin-top: 8px;
+      color: var(--text-main);
+    }
+
+    /* PARTNERS */
+    .partners {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .partners img {
+      height: 60px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .partners img:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      color: var(--text-muted);
+    }
+  </style>
 </head>
 <body>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>RC LLC Construction</h1>
-            <p>Our new website is under construction.</p>
-            <p>We're building something great — stay tuned.</p>
+<header>
+  <div class="brand">
+    <img src="assets/logo.png" alt="Ricket's Construction Logo" class="brand-logo">
+  </div>
 
-            <div class="phone-box">
-                Call Us: (440) 796-9239
-            </div>
-        </div>
-    </section>
+  <nav>
+    <a href="#construction">Construction</a>
+    <a href="#equipment">Equipment Rental</a>
+    <a href="#landscaping">Landscaping</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
+<section class="hero">
+  <h1>We Provide Commercial & Residential Construction, Equipment Rental & Landscaping Services to Northeast Ohio</h1>
+  <p>Quality craftsmanship, honest pricing, and a commitment to doing the job right — every time.</p>
+  <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+    Get a Free Estimate
+  </button>
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-        © 2026 RC LLC Construction — All Rights Reserved
-    </footer>
+<!-- CONSTRUCTION -->
+<section class="section" id="construction">
+  <h2>Construction</h2>
+  <div class="text-block">
+    <p>As a General Contractor we can take your project from concept to completion — while keeping your budget in mind! Our wide, varied experience in both Commercial and Residential Construction combined with our ability to truly listen to your list of wants allows us to make recommendations for the best solutions to achieve your goals.</p>
 
-    <script>
-        // Simple countdown timer (example: 60 days from now)
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 60);
+    <p>Our preventative maintenance programs can help to keep small problems from becoming big issues for your home or business.</p>
+  </div>
+</section>
 
-        function updateTimer() {
-            const now = new Date();
-            const diff = launchDate - now;
+<!-- EQUIPMENT RENTAL -->
+<section class="section" id="equipment">
+  <h2>Equipment Rental</h2>
+  <div class="text-block">
+    <p>RC Equipment Rentals deliver a comprehensive inventory of large and small equipment rentals to meet the needs of Contractors and Homeowners.</p>
 
-            if (diff <= 0) {
-                document.getElementById("timer").innerHTML = "We're Live!";
-                return;
-            }
+    <p>Not sure what you need? We've got you covered! We aren't just order takers. We have wide experience in Construction & Landscaping actually using the same type of equipment. We can recommend the right equipment for your project. Even better — we'll teach you how to use what you rent!</p>
+  </div>
+</section>
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
+<!-- LANDSCAPING -->
+<section class="section" id="landscaping">
+  <h2>Landscaping</h2>
+  <div class="text-block">
+    <p>You can rely on RC Landscaping to design, build and maintain a wide variety of beautiful features out of plants, pavers, brick, concrete, and other quality materials.</p>
 
-            document.getElementById("timer").innerHTML =
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        }
+    <p>We offer carefully detailed, accurate quotes to ensure the best price as a first step towards the beginning of your project — whatever it may be, from turf to irrigation to hardscaping and custom outdoor lighting.</p>
+  </div>
+</section>
 
-        setInterval(updateTimer, 1000);
-        updateTimer();
-    </script>
+<!-- ABOUT / FAMILY OWNED -->
+<section class="section" id="about">
+  <h2>Local Family Owned & Operated</h2>
+  <div class="text-block">
+    <p>Here at Ricket's Construction we have a family first mentality. Safety for our customers and their family is important. We appreciate the opportunity to serve our customers in whatever way they need, for both businesses and residential.</p>
+
+    <p>We strive to be clean and professional in your business or home just like we would want in ours.</p>
+
+    <p><strong>We look forward to the opportunity to meet you!</strong></p>
+
+    <h3>Nathan Ricket</h3>
+    <p>Hi, I'm Nathan Ricket, the proud Owner of Ricket's Construction company. As a General Contractor we provide high-quality construction services to our commercial & residential Northeast Ohio Customers. In recent years we've expanded our offering to include large and small equipment rental as well as landscaping services.</p>
+
+    <p>We are dedicated to delivering exceptional workmanship and outstanding customer service, and we have built a team of skilled professionals who share our commitment to excellence.</p>
+
+    <p>Every construction or landscaping project is unique, which is why we work closely with our clients to ensure that we deliver solutions that meet their specific needs.</p>
+
+    <p><strong>Contact us today to learn more about our services and how we can help you with your next construction project.</strong></p>
+  </div>
+</section>
+
+<!-- SERVICES LIST -->
+<section class="section">
+  <h2>Commercial & Residential Professional Services</h2>
+  <ul class="services-list">
+    <li>Plumbing</li>
+    <li>Electrical</li>
+    <li>HVAC</li>
+    <li>Flooring</li>
+    <li>Windows</li>
+    <li>Siding</li>
+    <li>Doors</li>
+    <li>Kitchen Renovations</li>
+    <li>Bathroom Renovation</li>
+    <li>Garages</li>
+    <li>Pole Buildings</li>
+    <li>Decks</li>
+    <li>Home Inspection</li>
+    <li>LED Lighting Solutions</li>
+    <li>Wall Coatings</li>
+    <li>Smart Home Setups</li>
+    <li>Pavers</li>
+    <li>Irrigation Systems</li>
+    <li>Water Features</li>
+    <li>Gazebos & Pergolas</li>
+  </ul>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <h2>Testimonials</h2>
+
+  <div class="testimonial">
+    ⭐⭐⭐⭐⭐  
+    <p>I highly recommend Nathan’s work. He has done odd jobs at my home and always shows up right away. He repaired some drywall in our home and the quality was amazing. He came back multiple times to make sure it was perfect. I’ve also called him last minute to remove snow and he’s super responsive, does great work and is a great communicator. Pretty much if you need anything done he can do it!</p>
+    <strong>— Amanda T.</strong>
+  </div>
+
+  <div class="testimonial">
+    ⭐⭐⭐⭐⭐  
+    <p>Nathan was really friendly, professional and came out on the same day. We had fears of our home needing more work than what was actually needed but he put us at ease by educating us on the problem and solution. He had our best interest in mind and not how to make more money for himself. We’re very pleased we went with him and we’ll definitely be calling him again.</p>
+    <strong>— Luis L.</strong>
+  </div>
+
+  <div class="testimonial">
+    ⭐⭐⭐⭐⭐  
+    <p>Nathan is very professional and safety conscious. He and his assistants wore masks while working inside and outside. He helped us work with vendors to select and order materials, and arranged a convenient schedule. He gave an accurate estimate of the time needed and checked with us whenever clarification was needed. The completed job is beautiful and professionally done. We highly recommend Ricket's Construction.</p>
+    <strong>— Mike & Stacey G.</strong>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="section">
+  <h2>Our Partners</h2>
+  <div class="partners">
+    <img src="assets/conklin.webp" alt="Conklin">
+    <img src="assets/bobcat.webp" alt="Bobcat">
+    <img src="assets/idi.webp" alt="IDI Distributors">
+    <img src="assets/wright.webp" alt="Wright">
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <h2>Contact Us</h2>
+  <div class="text-block" style="text-align:center;">
+    <p><strong>Phone:</strong> <a href="tel:440-796-9239">(440) 796-9239</a></p>
+    <p><strong>Email:</strong> <a href="mailto:nathan@ricketsconstruction.com">nathan@ricketsconstruction.com</a></p>
+    <p><strong>Facebook:</strong> <a href="https://www.facebook.com/RicketsConstruction" target="_blank">Visit our page</a></p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Ricket's Construction · All Rights Reserved
+</footer>
 
 </body>
 </html>
